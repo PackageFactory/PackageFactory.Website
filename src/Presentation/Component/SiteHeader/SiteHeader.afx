@@ -1,0 +1,7 @@
+export default (
+	<header class="p-5 bg-gray-800 text-gray-200 flex justify-center">
+		<a href={props.urlToHomePage}>
+			PackageFactory
+		</a>
+	</header>
+);

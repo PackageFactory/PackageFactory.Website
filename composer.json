@@ -1,0 +1,38 @@
+{
+    "name": "packagefactory/website",
+    "description": "PackageFactory.org website",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wilhelm Behncke",
+            "email": "wilhelm.behncke@protonmail.com"
+        }
+    ],
+    "require": {
+        "packagefactory/kristlbol": "dev-master",
+        "packagefactory/componentengine": "dev-master"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "PackageFactory\\Website\\": "src/",
+            "PackageFactory\\Website\\Test\\": "test/"
+        }
+    },
+    "minimum-stability": "dev",
+    "repositories": {
+        "kristlbol": {
+            "url": "../PackageFactory.KristlBol",
+            "type": "path"
+        },
+        "component-engine": {
+            "url": "../PackageFactory.ComponentEngine",
+            "type": "path"
+        },
+        "virtual-dom": {
+            "url": "git@github.com:PackageFactory/PackageFactory.VirtualDOM.git",
+            "type": "vcs"
+        }
+    }
+}

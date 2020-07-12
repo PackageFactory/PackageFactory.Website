@@ -1,0 +1,17 @@
+{
+  "name": "@packagefactory/website",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.5",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-uglifycss": "^1.1.0",
+    "tailwindcss": "^1.4.6"
+  }
+}
