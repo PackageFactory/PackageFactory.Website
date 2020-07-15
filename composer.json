@@ -21,6 +21,7 @@
         }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "repositories": {
         "kristlbol": {
             "url": "../PackageFactory.KristlBol",
@@ -33,6 +34,15 @@
         "virtual-dom": {
             "url": "git@github.com:PackageFactory/PackageFactory.VirtualDOM.git",
             "type": "vcs"
+        }
+    },
+    "extra": {
+        "kristlbol": {
+            "batches": {
+                "default": {
+                    "rootDirectory": "PackageFactory\\Website\\Application\\RootDirectory"
+                }
+            }
         }
     }
 }
