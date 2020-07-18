@@ -1,41 +1,18 @@
 <?php declare(strict_types=1);
 namespace PackageFactory\Website\Presentation\Document;
 
-use PackageFactory\KristlBol\Domain\Document;
-use PackageFactory\VirtualDOM\Attribute;
-use PackageFactory\VirtualDOM\Attributes;
-use PackageFactory\VirtualDOM\DangerouslyUnescapedText;
-use PackageFactory\VirtualDOM\Element;
-use PackageFactory\VirtualDOM\ElementType;
-use PackageFactory\VirtualDOM\NodeList;
-use PackageFactory\VirtualDOM\Text;
+use PackageFactory\VirtualDOM\Component\Document;
+use PackageFactory\VirtualDOM\Component\Body;
+use PackageFactory\VirtualDOM\Component\Head;
+use PackageFactory\VirtualDOM\Component\Link;
+use PackageFactory\VirtualDOM\Component\Script;
+use PackageFactory\VirtualDOM\Model\Children;
 use PackageFactory\Website\Domain\WebPage\WebPage;
+use PackageFactory\Website\Presentation\Component\HeroStage\HeroStage;
 use PackageFactory\Website\Presentation\Component\SiteHeader\SiteHeader;
 
 final class DocumentFactory
 {
-    /**
-     * @var TitleFactory
-     */
-    private $titleFactory;
-
-    /**
-     * @var JsonLdFactory
-     */
-    private $jsonLdFactory;
-
-    /**
-     * @var StyleSheetLinkFactory
-     */
-    private $styleSheetLinkFactory;
-
-    public function __construct()
-    {
-        $this->titleFactory = new TitleFactory();
-        $this->jsonLdFactory = new JsonLdFactory();
-        $this->styleSheetLinkFactory = new StyleSheetLinkFactory();
-    }
-
     public function forWebPage(WebPage $webPage): Document
     {
         $path = rtrim(parse_url($webPage->getUrl(), PHP_URL_PATH), '/');
@@ -43,32 +20,26 @@ final class DocumentFactory
             $path .= '/index.html';
         }
         
-        $document = Document::empty($path);
-        return $document
-            ->withHead(
-                $document->getHead()->withChildren(
-                    $document->getHead()->getChildren()
-                        ->withAppendedNode(
-                            $this->titleFactory->forWebPage($webPage)
-                        )
-                        ->withAppendedNode(
-                            $this->jsonLdFactory->forWebPage($webPage)
-                        )
-                        ->withAppendedNode(
-                            $this->styleSheetLinkFactory->forWebPage($webPage)
-                        )
-                )
-            )
-        ;
+        return new Document(
+            'html',
+            Head::fromTitle($webPage->getName())
+                ->withLink(Link::stylesheet('/css/main.css'))
+                ->withScript(Script::jsonLd(json_encode($webPage->getAsJsonLD()))),
+            Body::empty()
+        );
     }
 
     public function forHomePage(WebPage $homepage): Document
     {
-        $document = $this->forWebPage($homepage)->withPath('/index.html');
+        $document = $this->forWebPage($homepage);
+
         return $document->withBody(
             $document->getBody()->withChildren(
-                $document->getBody()->getChildren()->withPrependedNode(
-                    SiteHeader::create()->getAsVirtualDOMNode()
+                $document->getBody()->getChildren()->withPrependedChildren(
+                    Children::fromArray([
+                        SiteHeader::create(),
+                        HeroStage::create('PackageFactory')
+                    ])
                 )
             )
         );

@@ -1,0 +1,7 @@
+export default (
+    <section class="p-40 flex items-center justify-center">
+        <h1 class="text-3xl">
+            {props.title}
+        </h1>
+    </section>
+)

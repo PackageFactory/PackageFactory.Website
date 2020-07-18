@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace PackageFactory\Website\Presentation\Component\SiteHeader;
+namespace PackageFactory\Website\Presentation\Component\HeroStage;
 
 use PackageFactory\ComponentEngine\Parser\Ast\Module\Module;
 use PackageFactory\ComponentEngine\Parser\Lexer\Tokenizer;
@@ -11,35 +11,35 @@ use PackageFactory\ComponentEngine\Runtime\Runtime;
 use PackageFactory\VirtualDOM\Model\ComponentInterface;
 use PackageFactory\VirtualDOM\Model\VisitorInterface;
 
-final class SiteHeader implements ComponentInterface
+final class HeroStage implements ComponentInterface
 {
     /**
      * @var string
      */
-    private $urlToHomePage;
+    private $title;
 
     /**
-     * @param string $urlToHomePage
+     * @param string $title
      */
-    private function __construct(string $urlToHomePage)
+    private function __construct(string $title)
     {
-        $this->urlToHomePage = $urlToHomePage;
+        $this->title = $title;
     }
 
     /**
-     * @return self
+     * @param string $title
      */
-    public static function create(): self
+    public static function create(string $title): self
     {
-        return new self('/');
+        return new self($title);
     }
 
     /**
      * @return string
      */
-    public function getUrlToHomePage(): string
+    public function getTitle(): string
     {
-        return $this->urlToHomePage;
+        return $this->title;
     }
 
     /**
@@ -47,7 +47,7 @@ final class SiteHeader implements ComponentInterface
      */
     public function render(VisitorInterface $visitor): void
     {
-        $source = Source::fromFile(__DIR__ . DIRECTORY_SEPARATOR . 'SiteHeader.afx');
+        $source = Source::fromFile(__DIR__ . DIRECTORY_SEPARATOR . 'HeroStage.afx');
         $tokenizer = Tokenizer::fromSource($source);
         $stream = TokenStream::fromTokenizer($tokenizer);
         $module = Module::fromTokenStream($stream);

@@ -11,7 +11,8 @@
     ],
     "require": {
         "packagefactory/kristlbol": "dev-master",
-        "packagefactory/componentengine": "dev-master"
+        "packagefactory/componentengine": "dev-master",
+        "packagefactory/virtualdom": "dev-master"
     },
     "require-dev": {},
     "autoload": {
