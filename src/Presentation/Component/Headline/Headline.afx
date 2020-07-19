@@ -1,0 +1,13 @@
+export default (
+    <$tag 
+        tagName={props.type}
+        class={[
+            props.style.isRegular && '',
+            props.style.isHero && 'text-3xl',
+            props.style.isSection && 'text-2xl',
+            props.class
+        ]}
+        >
+        {props.content}
+    </$tag>
+)

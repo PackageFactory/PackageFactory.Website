@@ -7,9 +7,11 @@ use PackageFactory\VirtualDOM\Component\Head;
 use PackageFactory\VirtualDOM\Component\Link;
 use PackageFactory\VirtualDOM\Component\Script;
 use PackageFactory\VirtualDOM\Model\Children;
+use PackageFactory\VirtualDOM\Model\Text;
 use PackageFactory\Website\Domain\WebPage\WebPage;
 use PackageFactory\Website\Presentation\Component\HeroStage\HeroStage;
 use PackageFactory\Website\Presentation\Component\SiteHeader\SiteHeader;
+use PackageFactory\Website\Presentation\Component\Stage\Stage;
 
 final class DocumentFactory
 {
@@ -38,7 +40,10 @@ final class DocumentFactory
                 $document->getBody()->getChildren()->withPrependedChildren(
                     Children::fromArray([
                         SiteHeader::create(),
-                        HeroStage::create('PackageFactory')
+                        HeroStage::create('PackageFactory'),
+                        Stage::fromContent(
+                            Text::fromString('Hello Stage')
+                        )
                     ])
                 )
             )

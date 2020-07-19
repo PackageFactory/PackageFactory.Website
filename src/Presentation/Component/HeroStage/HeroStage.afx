@@ -1,7 +1,9 @@
+import Headline from "../Headline/Headline.afx"
+
 export default (
     <section class="p-40 flex items-center justify-center">
-        <h1 class="text-3xl">
+        <Headline style={{ isHero: true }} type="h1">
             {props.title}
-        </h1>
+        </Headline>
     </section>
 )

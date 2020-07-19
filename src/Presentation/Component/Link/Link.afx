@@ -1,0 +1,10 @@
+export default (
+    <a 
+        href={props.href}
+        rel={props.rel}
+        target={props.target}
+        class={[props.class ?? '']}
+        >
+        {props.content}
+    </a>
+)

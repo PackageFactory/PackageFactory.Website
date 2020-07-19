@@ -34,6 +34,14 @@ final class HomePage implements FileInterface
     }
 
     /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return 'text/html';
+    }
+
+    /**
      * @return Path
      */
     public function getPath(): Path
@@ -44,7 +52,7 @@ final class HomePage implements FileInterface
     /**
      * @return ContentInterface
      */
-    public function findContent(): ContentInterface
+    public function getContent(): ContentInterface
     {
         $homepage = $this->webPageRepository->findHomePage();
         $document = $this->documentFactory->forHomePage($homepage);
